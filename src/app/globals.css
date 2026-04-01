@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --background: #fafafa;
+  --foreground: #09090b;
+  --surface: #18181b;
+  --surface-muted: #3f3f46;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --muted: #475569;
+  --border: #e4e4e7;
+  --ring: #2563eb;
+  --on-surface: #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --background: #09090b;
+    --foreground: #fafafa;
+    --surface: #18181b;
+    --surface-muted: #52525b;
+    --accent: #3b82f6;
+    --accent-foreground: #ffffff;
+    --muted: #94a3b8;
+    --border: #27272a;
+    --ring: #60a5fa;
+    --on-surface: #fafafa;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #09090b;
+  --foreground: #fafafa;
+  --surface: #18181b;
+  --surface-muted: #52525b;
+  --accent: #3b82f6;
+  --accent-foreground: #ffffff;
+  --muted: #94a3b8;
+  --border: #27272a;
+  --ring: #60a5fa;
+  --on-surface: #fafafa;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --background: #fafafa;
+  --foreground: #09090b;
+  --surface: #18181b;
+  --surface-muted: #3f3f46;
+  --accent: #2563eb;
+  --accent-foreground: #ffffff;
+  --muted: #475569;
+  --border: #e4e4e7;
+  --ring: #2563eb;
+  --on-surface: #fafafa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-on-surface: var(--on-surface);
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 45ms !important;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Focus visible for keyboard users — avoid outline-none without replacement */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.focus-ring {
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+}
