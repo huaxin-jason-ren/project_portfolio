@@ -109,3 +109,82 @@ body {
 .focus-ring {
   @apply outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
 }
+
+/* Atmospheric hero & page depth (variables work in light + dark) */
+.hero-atmosphere {
+  background: radial-gradient(
+    ellipse 90% 60% at 50% -30%,
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    transparent 55%
+  );
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--foreground) 5%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--foreground) 5%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 85% 70% at 50% 30%, black 20%, transparent 75%);
+}
+
+.hero-gradient-text {
+  background: linear-gradient(
+    115deg,
+    var(--foreground) 0%,
+    var(--foreground) 35%,
+    var(--accent) 52%,
+    var(--foreground) 68%,
+    var(--foreground) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-blob {
+    animation: hero-blob-drift 18s ease-in-out infinite alternate;
+  }
+
+  .hero-blob-delayed {
+    animation: hero-blob-drift 22s ease-in-out infinite alternate-reverse;
+  }
+}
+
+@keyframes hero-blob-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(2%, 3%) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob,
+  .hero-blob-delayed {
+    animation: none;
+  }
+}
+
+.glass-card {
+  background: color-mix(in srgb, var(--background) 78%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.page-bg {
+  background: radial-gradient(
+    ellipse 100% 70% at 50% -10%,
+    color-mix(in srgb, var(--accent) 12%, transparent),
+    transparent 55%
+  );
+}

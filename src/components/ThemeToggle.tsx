@@ -1,9 +1,10 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "theme";
+const THEME_CHANGE = "portfolio-theme-change";
 
 function resolveDark(): boolean {
   if (typeof document === "undefined") return false;
@@ -13,38 +14,41 @@ function resolveDark(): boolean {
   return window.matchMedia("(prefers-color-scheme: dark)").matches;
 }
 
+function subscribeTheme(onStoreChange: () => void) {
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+  const onMq = () => {
+    try {
+      if (localStorage.getItem(STORAGE_KEY)) return;
+    } catch {
+      /* ignore */
+    }
+    onStoreChange();
+  };
+  const onCustom = () => onStoreChange();
+  mq.addEventListener("change", onMq);
+  window.addEventListener(THEME_CHANGE, onCustom);
+  return () => {
+    mq.removeEventListener("change", onMq);
+    window.removeEventListener(THEME_CHANGE, onCustom);
+  };
+}
+
+function getServerSnapshot(): boolean {
+  return false;
+}
+
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    setIsDark(resolveDark());
-  }, []);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const onChange = () => {
-      try {
-        if (localStorage.getItem(STORAGE_KEY)) return;
-      } catch {
-        /* ignore */
-      }
-      setIsDark(mq.matches);
-    };
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
-  }, []);
+  const isDark = useSyncExternalStore(subscribeTheme, resolveDark, getServerSnapshot);
 
   const toggle = useCallback(() => {
     const next = !resolveDark();
-    setIsDark(next);
     document.documentElement.setAttribute("data-theme", next ? "dark" : "light");
     try {
       localStorage.setItem(STORAGE_KEY, next ? "dark" : "light");
     } catch {
       /* ignore */
     }
+    window.dispatchEvent(new Event(THEME_CHANGE));
   }, []);
 
   return (
@@ -55,14 +59,10 @@ export function ThemeToggle() {
       aria-pressed={isDark}
       className="focus-ring inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-border bg-background text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
     >
-      {mounted ? (
-        isDark ? (
-          <Sun className="h-5 w-5" aria-hidden />
-        ) : (
-          <Moon className="h-5 w-5" aria-hidden />
-        )
+      {isDark ? (
+        <Sun className="h-5 w-5" aria-hidden />
       ) : (
-        <Moon className="h-5 w-5 opacity-40" aria-hidden />
+        <Moon className="h-5 w-5" aria-hidden />
       )}
     </button>
   );

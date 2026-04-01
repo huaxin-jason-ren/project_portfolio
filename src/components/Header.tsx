@@ -11,7 +11,7 @@ const nav = [
 export function Header() {
   return (
     <header className="pointer-events-none fixed top-4 left-4 right-4 z-50 sm:left-6 sm:right-6 lg:left-8 lg:right-8">
-      <div className="pointer-events-auto mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl border border-border bg-background/90 px-4 py-3 shadow-sm backdrop-blur-md sm:px-6">
+      <div className="glass-card pointer-events-auto mx-auto flex max-w-7xl items-center justify-between gap-3 rounded-2xl border border-border/80 px-4 py-3 shadow-[0_8px_40px_-16px_rgba(0,0,0,0.18)] sm:gap-4 sm:px-6">
         <Link
           href="#top"
           className="font-heading text-lg font-semibold tracking-tight text-foreground transition-colors duration-200 hover:text-accent focus-ring rounded-md cursor-pointer"

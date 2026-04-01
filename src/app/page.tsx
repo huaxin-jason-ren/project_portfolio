@@ -6,7 +6,8 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 
 export default function Home() {
   return (
-    <div id="top" className="flex min-h-full flex-col bg-background">
+    <div id="top" className="relative flex min-h-full flex-col bg-background">
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 page-bg" />
       <Header />
       <main className="flex-1">
         <Hero />

@@ -6,8 +6,11 @@ const iconClass = "h-5 w-5 shrink-0";
 
 export function Footer() {
   return (
-    <footer id="contact" className="border-t border-border bg-background pb-12 pt-20">
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8">
+    <footer
+      id="contact"
+      className="relative border-t border-transparent bg-background bg-gradient-to-b from-accent/[0.06] via-background to-background pb-14 pt-24"
+    >
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8">
         <div className="max-w-xl space-y-3">
           <p className="font-heading text-2xl font-semibold tracking-tight text-foreground">
             {site.name}
@@ -51,7 +54,7 @@ export function Footer() {
           </li>
         </ul>
       </div>
-      <p className="mx-auto mt-12 max-w-6xl px-4 text-center text-xs text-muted sm:px-6 lg:px-8">
+      <p className="mx-auto mt-12 max-w-7xl px-4 text-center text-xs text-muted sm:px-6 lg:px-8">
         © {new Date().getFullYear()} {site.name}. Built with Next.js.
       </p>
     </footer>
