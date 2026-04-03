@@ -57,12 +57,13 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       aria-pressed={isDark}
-      className="focus-ring inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-border bg-background text-foreground transition-colors duration-200 hover:border-accent hover:text-accent"
+      className="focus-ring inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-xl border text-foreground transition-[border-color,color,background] duration-200 hover:border-accent hover:text-accent"
+      style={{ borderColor: "var(--border)", background: "var(--surface)" }}
     >
       {isDark ? (
-        <Sun className="h-5 w-5" aria-hidden />
+        <Sun className="h-4.5 w-4.5" aria-hidden />
       ) : (
-        <Moon className="h-5 w-5" aria-hidden />
+        <Moon className="h-4.5 w-4.5" aria-hidden />
       )}
     </button>
   );

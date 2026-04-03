@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python skills/ui-ux-pro-max/scripts/search.py \"developer portfolio dark elegant impressive\" --design-system -p \"Jason Ren Portfolio\" -f markdown)",
+      "Bash(python3 skills/ui-ux-pro-max/scripts/search.py \"developer portfolio dark elegant impressive\" --design-system -p \"Jason Ren Portfolio\" -f markdown)",
+      "Bash(npx next:*)"
+    ]
+  }
+}
